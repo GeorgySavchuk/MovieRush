@@ -1,9 +1,10 @@
 import {combineReducers} from "redux";
 import {configureStore} from "@reduxjs/toolkit";
 import {MovieRushApi} from "../api";
-import {movieReducer} from "./slices";
+import {movieReducer, trailerReducer} from "./slices";
 const rootReducer = combineReducers({
     movieReducer,
+    trailerReducer,
     [MovieRushApi.reducerPath]: MovieRushApi.reducer,
 })
 

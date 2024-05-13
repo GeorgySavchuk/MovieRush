@@ -58,7 +58,7 @@ export interface MoviePerson {
     photo: string;
 }
 
-interface MovieTrailer {
+export interface MovieTrailer {
     name: string;
     site: string;
     url: string;

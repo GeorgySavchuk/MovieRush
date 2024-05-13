@@ -7,7 +7,7 @@ import {Loader} from "../../shared/ui";
 import {MovieInfo} from "../../widgets/movie-info";
 import {SimilarMovies} from "../../widgets/similar-movies";
 import {useAppDispatch, useAppSelector} from "../../shared/lib";
-import {setSimilarMovieLoading} from "../../shared/model/slices/movieSlice.ts";
+import {setSimilarMovieLoading} from "../../shared/model";
 
 export const MoviePage = () => {
     const dispatch = useAppDispatch()

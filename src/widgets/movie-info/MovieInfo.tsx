@@ -1,12 +1,17 @@
 import styles from './styles.module.css'
 import {Movie, MoviePerson} from "../../shared/api/types.ts";
 import {FC} from "react";
-import {printMovieDuration} from "../../shared/lib";
+import {printMovieDuration, useAppDispatch, useAppSelector} from "../../shared/lib";
 import {MovieRating} from "../../shared/ui/movie-rating";
+import {setTrailerOpenStatus} from "../../shared/model";
+import {Overlay} from "../../shared/ui/overlay";
+import {RxCross1} from "react-icons/rx";
 interface MovieInfoProps {
     movie: Movie;
 }
 export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
+    const dispatch = useAppDispatch()
+    const {isOpen} = useAppSelector(state => state.trailerReducer)
 
     const printDirector = (persons: MoviePerson[]): string => {
         let director: string = ""
@@ -24,6 +29,14 @@ export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
                 ? acc += actor.name
                 : acc += `, ${actor.name}`
         }, '')
+    }
+
+    const openTrailer = () => {
+        dispatch(setTrailerOpenStatus(true))
+    }
+
+    const closeTrailer = () => {
+        dispatch(setTrailerOpenStatus(false))
     }
 
     return (
@@ -70,6 +83,19 @@ export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
                             <span>{printActors(movie.persons)}</span>
                         </div>
                     </div>
+                }
+                {
+                    movie.videos && <>
+                        <button className={styles.trailerBtn} onClick={openTrailer}>Трейлер</button>
+                        <Overlay isOpen={isOpen}>
+                            <div className={styles.modalContent}>
+                                <iframe src={movie.videos.trailers[0].url} title='Трейлер' height='100%' width='100%'
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen={true}></iframe>
+                                <RxCross1 size={30} color={'#fff'} className={styles.closeBtn} onClick={closeTrailer}/>
+                            </div>
+                        </Overlay>
+                    </>
                 }
             </div>
             <div className={styles.moviePoster}>
