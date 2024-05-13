@@ -1,0 +1,8 @@
+.movieRating {
+    width: min-content;
+    padding: 0.1rem 0.5rem;
+    color: rgb(241 245 249);
+    background-color: rgb(39 39 42);
+    border-radius: 5px;
+    font-size: .9rem;
+}

@@ -1,0 +1,72 @@
+.homepage {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100%;
+}
+.intro {
+    position: relative;
+}
+.img {
+    width: 100%;
+    max-height: 90vh;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.about {
+    position: absolute;
+    bottom: 45%;
+    padding: 0 4rem;
+    color: #fff;
+}
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity .7s ease;
+}
+.subTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity .7s ease;
+}
+.animate .title{
+    opacity: 1;
+}
+.animate .subTitle{
+    opacity: 1;
+    transition-delay: .5s, .5s;
+}
+.movieCategories {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    margin-bottom: 1rem;
+}
+@media (max-width: 900px) {
+    .subTitle {
+        display: none;
+    }
+    .title {
+        font-size: 2rem;
+    }
+    .about {
+        bottom: 30%;
+    }
+}
+@media (max-width: 850px) {
+    .about {
+        padding: 0 2rem;
+    }
+}
+@media (max-width: 500px) {
+    .title {
+        font-size: 1rem;
+    }
+    .about {
+        bottom: 40%;
+    }
+}

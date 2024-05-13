@@ -1,0 +1,1 @@
+export {MovieSlider} from './MovieSlider.tsx'
