@@ -87,7 +87,7 @@ export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
                     </div>
                 }
                 {
-                    movie.videos?.trailers.length !== 0 && <>
+                    movie.videos && movie.videos?.trailers.length !== 0 && <>
                         <button className={styles.trailerBtn} onClick={openTrailer}>Трейлер</button>
                         <Overlay isOpen={isOpen}>
                             <div className={styles.modalContent}>
