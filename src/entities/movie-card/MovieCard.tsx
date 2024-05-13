@@ -20,7 +20,7 @@ export const MovieCard = forwardRef<HTMLAnchorElement, MovieCardProps>(({movie},
             <img src={movie.poster.url} alt={`Постер фильма ${movie.name}`}/>
             <div className={styles.content}>
                 {
-                    movie.rating && <MovieRating rating={movie.rating.kp}/>
+                    movie.rating && movie.rating?.kp !== 0 && <MovieRating rating={movie.rating?.kp}/>
                 }
                 <span className={styles.movieNameAndYear}>
                     {

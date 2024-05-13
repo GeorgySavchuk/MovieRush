@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 import {Movie, MoviePerson} from "../../shared/api/types.ts";
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import {printMovieDuration, useAppDispatch, useAppSelector} from "../../shared/lib";
 import {MovieRating} from "../../shared/ui/movie-rating";
 import {setTrailerOpenStatus} from "../../shared/model";
@@ -12,9 +12,6 @@ interface MovieInfoProps {
 export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
     const dispatch = useAppDispatch()
     const {isOpen} = useAppSelector(state => state.trailerReducer)
-    useEffect(() => {
-        console.log(movie)
-    }, []);
 
     const printDirector = (persons: MoviePerson[]): string => {
         let director: string = ""
@@ -48,7 +45,7 @@ export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
                 <h2>{movie.name}</h2>
                 <div className={styles.mainProps}>
                     {
-                        movie.rating.kp && <MovieRating rating={movie.rating.kp}/>
+                        movie.rating && movie.rating?.kp !== 0 && <MovieRating rating={movie.rating?.kp as number}/>
                     }
                     {
                         movie.year && <span className={styles.movieYear}>
@@ -74,7 +71,9 @@ export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
                         </span>
                     }
                 </div>
-                <p>{movie.description}</p>
+                {
+                    movie.description && <p>{movie.description}</p>
+                }
                 {
                     movie.persons && <div className={styles.movieCast}>
                         <div className={styles.director}>

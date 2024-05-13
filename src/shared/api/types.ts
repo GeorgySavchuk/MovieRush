@@ -12,7 +12,7 @@ export interface Movie {
     type: string;
     typeNumber: number;
     year: number;
-    rating: MovieRating;
+    rating?: MovieRating;
     ageRating: number;
     movieLength: number;
     genres: {name: string}[];
