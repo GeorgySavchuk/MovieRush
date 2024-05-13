@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 import {Movie, MoviePerson} from "../../shared/api/types.ts";
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import {printMovieDuration, useAppDispatch, useAppSelector} from "../../shared/lib";
 import {MovieRating} from "../../shared/ui/movie-rating";
 import {setTrailerOpenStatus} from "../../shared/model";
@@ -12,6 +12,9 @@ interface MovieInfoProps {
 export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
     const dispatch = useAppDispatch()
     const {isOpen} = useAppSelector(state => state.trailerReducer)
+    useEffect(() => {
+        console.log(movie)
+    }, []);
 
     const printDirector = (persons: MoviePerson[]): string => {
         let director: string = ""
@@ -85,11 +88,11 @@ export const MovieInfo: FC<MovieInfoProps> = ({movie}) => {
                     </div>
                 }
                 {
-                    movie.videos && <>
+                    movie.videos?.trailers.length !== 0 && <>
                         <button className={styles.trailerBtn} onClick={openTrailer}>Трейлер</button>
                         <Overlay isOpen={isOpen}>
                             <div className={styles.modalContent}>
-                                <iframe src={movie.videos.trailers[0].url} title='Трейлер' height='100%' width='100%'
+                                <iframe src={movie.videos?.trailers[0].url} title='Трейлер' height='100%' width='100%'
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowFullScreen={true}></iframe>
                                 <RxCross1 size={30} color={'#fff'} className={styles.closeBtn} onClick={closeTrailer}/>
